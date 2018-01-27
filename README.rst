@@ -17,7 +17,7 @@ Japanese: https://developers.line.me/ja/docs/messaging-api/reference/
 Install
 -------
 
-::
+:::
 
     $ pip install line-bot-sdk
 
