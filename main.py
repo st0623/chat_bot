@@ -50,8 +50,8 @@ def callback():
 
     # get request body as text
     body = request.get_data(as_text=True)
-    receive_json = json.loads(body)
-    userId = receive_json["events"][0]["source"]["userId"]
+    #receive_json = json.loads(body)
+    #userId = receive_json["events"][0]["source"]["userId"]
     app.logger.info("Request body: " + body)
 
     # handle webhook body
@@ -66,11 +66,11 @@ def callback():
 @handler.add(MessageEvent, message=TextMessage)
 def message_text(event):
 
-    receive_json = json.loads(MessageEvent)
-    userId = receive_json["events"][0]["source"]["userId"]
+    #receive_json = json.loads(MessageEvent)
+    #userId = receive_json["events"][0]["source"]["userId"]
     line_bot_api.reply_message(
         event.reply_token,
-        TextSendMessage(text=str(userId))
+        TextSendMessage(text=event.message_text)
     )
         ## TextSendMessage(text=event.message.text)
 
