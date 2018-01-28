@@ -70,7 +70,7 @@ def message_text(event):
     userId = receive_json["events"][0]["source"]["userId"]
     line_bot_api.reply_message(
         event.reply_token,
-        TextSendMessage(text=userId)
+        TextSendMessage(text=str(userId))
     )
         ## TextSendMessage(text=event.message.text)
 
