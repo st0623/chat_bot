@@ -71,10 +71,10 @@ def message_text(event):
 
     body = request.get_data(as_text=True)
     receive_json = json.loads(body)
-    userId = receive_json["events"][0]["source"]["userId"]
+    #userId = receive_json["events"][0]["source"]["userId"]
 
     event_list = receive_json["events"]
-    #userId = "hogehoge"
+    userId = "hogehoge"
     for e in event_list:
         if e["type"] == "follow":
             userId = e["source"]["userId"]
