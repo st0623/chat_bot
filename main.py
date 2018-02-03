@@ -57,7 +57,7 @@ app.config['SQLALCHEMY_DATABASE_URI'] = os.environ['DATABASE_URL']
 db = SQLAlchemy(app)
 
 # モデル作成
-class User(db.Model):
+class Users(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     line_userid = db.Column(db.String(80), unique=True)
 
@@ -65,7 +65,7 @@ class User(db.Model):
         self.line_userid = line_userid
 
     def __repr__(self):
-        return '<User %r>' % self.line_userid
+        return '<Users %r>' % self.line_userid
 
 # flaskによるマッピング
 @app.route("/callback", methods=['POST'])
@@ -99,8 +99,8 @@ def get_userid():
 def follow(event):
     line_userId = get_userid()
     # emailが未登録ならユーザー追加
-    if not db.session.query(User).filter(User.line_userid == line_userId).count():
-        reg = User(line_userId)
+    if not db.session.query(Users).filter(Users.line_userid == line_userId).count():
+        reg = Users(line_userId)
         db.session.add(reg)
         db.session.commit()
     #line_bot_api.reply_message(
