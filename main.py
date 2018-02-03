@@ -99,7 +99,7 @@ def get_userid():
 def follow(event):
     userId = get_userid()
     # emailが未登録ならユーザー追加
-    if not db.session.query(User).filter(User.userid == useId).count():
+    if not db.session.query(User).filter(User.userid == userId).count():
         reg = User(name, userId)
         db.session.add(reg)
         db.session.commit()
