@@ -17,6 +17,7 @@ import sys
 import json
 from argparse import ArgumentParser
 
+from flask.ext.sqlalchemy import SQLAlchemy
 from flask import Flask, request, abort
 from linebot import (
     LineBotApi, WebhookHandler
