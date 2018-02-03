@@ -70,7 +70,7 @@ def callback():
 def follow(event):
     line_bot_api.reply_message(
         event.reply_token,
-        TextSendMessage(text=userId)
+        TextSendMessage(text="hogehoge follow")
     )
 
 @handler.add(MessageEvent, message=TextMessage)
