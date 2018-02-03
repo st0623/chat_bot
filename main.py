@@ -44,6 +44,7 @@ line_bot_api = LineBotApi(channel_access_token)
 handler = WebhookHandler(channel_secret)
 
 
+# flaskによるマッピング
 @app.route("/callback", methods=['POST'])
 def callback():
     # get X-Line-Signature header value
@@ -55,6 +56,7 @@ def callback():
     #userId = receive_json["events"][0]["source"]["userId"]
     app.logger.info("Request body: " + body)
 
+    
     # handle webhook body
     try:
         handler.handle(body, signature)
@@ -69,9 +71,17 @@ def message_text(event):
 
     body = request.get_data(as_text=True)
     receive_json = json.loads(body)
-    userId = receive_json["events"][0]["source"]["userId"]
-    #receive_json = json.loads(MessageEvent)
     #userId = receive_json["events"][0]["source"]["userId"]
+
+    event = receive_json["events"]
+    userId = ""
+    for e in event:
+        if e["type"] == "follow":
+            userId = e["source"]["userId"]
+            break
+    
+    # receive_json = json.loads(MessageEvent)
+    # userId = receive_json["events"][0]["source"]["userId"]
     line_bot_api.reply_message(
         event.reply_token,
         TextSendMessage(text=userId)
