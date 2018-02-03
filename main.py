@@ -74,7 +74,7 @@ def message_text(event):
     #userId = receive_json["events"][0]["source"]["userId"]
 
     event = receive_json["events"]
-    userId = ""
+    userId = "hogehoge"
     for e in event:
         if e["type"] == "follow":
             userId = e["source"]["userId"]
