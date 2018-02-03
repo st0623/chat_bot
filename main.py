@@ -66,7 +66,7 @@ def callback():
     return 'OK'
 
 
-def get_userid(event):
+def get_userid():
     body = request.get_data(as_text=True)
     receive_json = json.loads(body)
     userId = receive_json["events"][0]["source"]["userId"]
