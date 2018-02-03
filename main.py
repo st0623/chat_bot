@@ -30,6 +30,10 @@ from linebot.models import (
 
 app = Flask(__name__)
 
+# DB接続に関する部分
+app.config['SQLALCHEMY_DATABASE_URI'] = os.environ['DATABASE_URL']
+db = SQLAlchemy(app)
+
 # get channel_secret and channel_access_token from your environment variable
 channel_secret = os.getenv('LINE_CHANNEL_SECRET', None)
 channel_access_token = os.getenv('LINE_CHANNEL_ACCESS_TOKEN', None)
@@ -43,6 +47,24 @@ if channel_access_token is None:
 line_bot_api = LineBotApi(channel_access_token)
 handler = WebhookHandler(channel_secret)
 
+from flask.ext.sqlalchemy import SQLAlchemy
+from flask import Flask, render_template, request
+
+# DB接続に関する部分
+app = Flask(__name__)
+app.config['SQLALCHEMY_DATABASE_URI'] = os.environ['DATABASE_URL']
+db = SQLAlchemy(app)
+
+# モデル作成
+class User(db.Model):
+    id = db.Column(db.Integer, primary_key=True)
+    userid = db.Column(db.String(80), unique=True)
+
+    def __init__(self, userid):
+        self.userid = userid
+
+    def __repr__(self):
+        return '<User %r>' % self.userid
 
 # flaskによるマッピング
 @app.route("/callback", methods=['POST'])
@@ -56,7 +78,7 @@ def callback():
     #userId = receive_json["events"][0]["source"]["userId"]
     app.logger.info("Request body: " + body)
 
-    
+
     # handle webhook body
     try:
         handler.handle(body, signature)
@@ -75,10 +97,15 @@ def get_userid():
 @handler.add(FollowEvent)
 def follow(event):
     userId = get_userid()
-    line_bot_api.reply_message(
-        event.reply_token,
-        TextSendMessage(text=userId)
-    )
+    # emailが未登録ならユーザー追加
+    if not db.session.query(User).filter(User.userid == useId).count():
+        reg = User(name, userId)
+        db.session.add(reg)
+        db.session.commit()
+    #line_bot_api.reply_message(
+    #    event.reply_token,
+    #    TextSendMessage(text=userId)
+    #)
 
 @handler.add(MessageEvent, message=TextMessage)
 def message_text(event):
@@ -93,7 +120,7 @@ def message_text(event):
         if e["type"] == "follow":
             userId = e["source"]["userId"]
             break
-    
+
     # receive_json = json.loads(MessageEvent)
     # userId = receive_json["events"][0]["source"]["userId"]
     line_bot_api.reply_message(
