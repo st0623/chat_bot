@@ -100,7 +100,7 @@ def follow(event):
     userId = get_userid()
     # emailが未登録ならユーザー追加
     if not db.session.query(User).filter(User.userid == userId).count():
-        reg = User(name, userId)
+        reg = User(userId)
         db.session.add(reg)
         db.session.commit()
     #line_bot_api.reply_message(
