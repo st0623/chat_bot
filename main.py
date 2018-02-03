@@ -66,11 +66,18 @@ def callback():
     return 'OK'
 
 
+def get_userid(event):
+    body = request.get_data(as_text=True)
+    receive_json = json.loads(body)
+    userId = receive_json["events"][0]["source"]["userId"]
+    return userId
+
 @handler.add(FollowEvent)
 def follow(event):
+    userId = get_userid()
     line_bot_api.reply_message(
         event.reply_token,
-        TextSendMessage(text="hogehoge flowo")
+        TextSendMessage(text=userId)
     )
 
 @handler.add(MessageEvent, message=TextMessage)
