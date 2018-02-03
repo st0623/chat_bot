@@ -66,11 +66,11 @@ def callback():
     return 'OK'
 
 
-@handler.add(FollowEvent, message=TextMessage)
+@handler.add(FollowEvent)
 def follow(event):
     line_bot_api.reply_message(
         event.reply_token,
-        TextSendMessage(text="hogehoge follow")
+        TextSendMessage(text="hogehoge flowo")
     )
 
 @handler.add(MessageEvent, message=TextMessage)
