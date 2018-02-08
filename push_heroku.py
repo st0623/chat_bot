@@ -42,6 +42,7 @@ for v in user_db:
 nikkei = getNikkeiHeadline.getNikkeiHeadline()
 title_list = nikkei.getTitle()
 url_list = nikkei.getUrl()
+print ("testtest")
 try:
     line_bot_api.multicast(line_id_list, TextSendMessage(text=title_list[0] + "\n https://www.nikkei.com"+url_list[0]))
     print ("test")
