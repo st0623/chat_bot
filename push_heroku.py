@@ -20,15 +20,13 @@ db = SQLAlchemy(app)
 #     reader = csv.reader(f)
 #    header = next(reader)
 
-    user_db = db.query(Users).all()
-    user_id_list = []
-    for v in user_db:
-        user_id_list.append(v.line_userid)
-    nikkei = getNikkeiHeadline.getNikkeiHeadline()
-    title_list = nikkei.getTitle()
-    url_list = nikkei.getUrl()
-    for row in reader:
-        line_id_list.append(row[1])
+user_db = db.query(Users).all()
+line_id_list = []
+for v in user_db:
+    line_id_list.append(v.line_userid)
+nikkei = getNikkeiHeadline.getNikkeiHeadline()
+title_list = nikkei.getTitle()
+url_list = nikkei.getUrl()
 try:
     line_bot_api.multicast(line_id_list, TextSendMessage(text=title_list[0] + "\n https://www.nikkei.com"+url_list[0]))
 except LineBotApiError as e:
