@@ -9,7 +9,7 @@ from flask_sqlalchemy import SQLAlchemy
 from flask import Flask, request, abort
 
 channel_access_token = os.getenv('LINE_CHANNEL_ACCESS_TOKEN', None)
-line_bot_api = LineBotApi('channel_access_token')
+line_bot_api = LineBotApi(channel_access_token)
 
 line_id_list = []
 
@@ -42,7 +42,6 @@ for v in user_db:
 nikkei = getNikkeiHeadline.getNikkeiHeadline()
 title_list = nikkei.getTitle()
 url_list = nikkei.getUrl()
-print ("testtest")
 try:
     line_bot_api.multicast(line_id_list, TextSendMessage(text=title_list[0] + "\n https://www.nikkei.com"+url_list[0]))
     print ("test")
