@@ -14,6 +14,7 @@ line_bot_api = LineBotApi('channel_access_token')
 line_id_list = []
 
 app = Flask(__name__)
+app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
 # DB接続に関する部分
 app.config['SQLALCHEMY_DATABASE_URI'] = os.environ['DATABASE_URL']
 db = SQLAlchemy(app)
