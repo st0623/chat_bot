@@ -15,6 +15,7 @@
 import os
 import sys
 import json
+
 from argparse import ArgumentParser
 
 from flask.ext.sqlalchemy import SQLAlchemy

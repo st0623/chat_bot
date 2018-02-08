@@ -1,0 +1,15 @@
+/bin/sh: python3: command not found
+---------------
+Traceback (most recent call last):
+  File "push.py", line 5, in <module>
+    import getNikkeiHeadline
+  File "/Users/s-takahashi/Documents/2_program/05_linebot/line-bot-sdk-python/getNikkeiHeadline.py", line 55, in <module>
+    print (title + " : ")
+UnicodeEncodeError: 'ascii' codec can't encode characters in position 0-11: ordinal not in range(128)
+---------------
+Traceback (most recent call last):
+  File "push.py", line 6, in <module>
+    import getNikkeiHeadline
+  File "/Users/s-takahashi/Documents/2_program/05_linebot/line-bot-sdk-python/getNikkeiHeadline.py", line 55, in <module>
+    print (title + " : ")
+UnicodeEncodeError: 'ascii' codec can't encode characters in position 0-11: ordinal not in range(128)
