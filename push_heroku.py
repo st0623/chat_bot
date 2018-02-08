@@ -23,7 +23,7 @@ db = SQLAlchemy(app)
 #     reader = csv.reader(f)
 #    header = next(reader)
 
-user_db = db.query(Users).all()
+user_db = db.session.query(Users).all()
 line_id_list = []
 for v in user_db:
     line_id_list.append(v.line_userid)
