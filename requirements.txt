@@ -5,3 +5,4 @@ future
 flask-sqlalchemy
 psycopg2
 bs4
+APScheduler==3.0.3

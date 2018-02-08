@@ -1,4 +1,5 @@
 # coding: utf-8 
+from apscheduler.schedulers.blocking import BlockingScheduler
 import csv
 from linebot import LineBotApi
 from linebot.models import TextSendMessage
@@ -19,6 +20,8 @@ app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
 app.config['SQLALCHEMY_DATABASE_URI'] = os.environ['DATABASE_URL']
 db = SQLAlchemy(app)
 
+sched = BlockingScheduler()
+
 # モデル作成
 class Users(db.Model):
     id = db.Column(db.Integer, primary_key=True)
@@ -34,16 +37,19 @@ class Users(db.Model):
 # with open('line_id.csv') as f:
 #     reader = csv.reader(f)
 #    header = next(reader)
+@sched.scheduled_job('interval', hour=20)
+def push_news():
+    user_db = db.session.query(Users).all()
+    line_id_list = []
+    for v in user_db:
+        line_id_list.append(v.line_userid)
+    nikkei = getNikkeiHeadline.getNikkeiHeadline()
+    title_list = nikkei.getTitle()
+    url_list = nikkei.getUrl()
+    try:
+        line_bot_api.multicast(line_id_list, TextSendMessage(text=title_list[0] + "\n https://www.nikkei.com"+url_list[0]))
+        print ("test")
+    except LineBotApiError as e:
+        print (e)
 
-user_db = db.session.query(Users).all()
-line_id_list = []
-for v in user_db:
-    line_id_list.append(v.line_userid)
-nikkei = getNikkeiHeadline.getNikkeiHeadline()
-title_list = nikkei.getTitle()
-url_list = nikkei.getUrl()
-try:
-    line_bot_api.multicast(line_id_list, TextSendMessage(text=title_list[0] + "\n https://www.nikkei.com"+url_list[0]))
-    print ("test")
-except LineBotApiError as e:
-    print (e)
+sched.start()
