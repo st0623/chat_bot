@@ -4,3 +4,4 @@ flask
 future
 flask-sqlalchemy
 psycopg2
+bs4
