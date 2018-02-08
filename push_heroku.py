@@ -47,6 +47,4 @@ try:
     line_bot_api.multicast(line_id_list, TextSendMessage(text=title_list[0] + "\n https://www.nikkei.com"+url_list[0]))
     print ("test")
 except LineBotApiError as e:
-    # error handle
-    ...
-
+    print (e)
