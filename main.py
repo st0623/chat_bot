@@ -15,7 +15,7 @@
 import os
 import sys
 import json
-
+import users
 from argparse import ArgumentParser
 
 from flask.ext.sqlalchemy import SQLAlchemy
@@ -59,17 +59,6 @@ app = Flask(__name__)
 app.config['SQLALCHEMY_DATABASE_URI'] = os.environ['DATABASE_URL']
 db = SQLAlchemy(app)
 
-# モデル作成
-class Users(db.Model):
-    id = db.Column(db.Integer, primary_key=True)
-    line_userid = db.Column(db.String(80), unique=True)
-
-    def __init__(self, line_userid):
-        self.line_userid = line_userid
-
-    def __repr__(self):
-        return '<Users %r>' % self.line_userid
-
 # flaskによるマッピング
 @app.route("/callback", methods=['POST'])
 def callback():
@@ -106,10 +95,11 @@ def follow(event):
         reg = Users(line_userId)
         db.session.add(reg)
         db.session.commit()
-    #line_bot_api.reply_message(
-    #    event.reply_token,
-    #    TextSendMessage(text=userId)
-    #)
+    follow_message = "友達登録ありがとう!\n毎日最新のニュースをプッシュします"
+    line_bot_api.reply_message(
+        event.reply_token,
+        TextSendMessage(text=follow_message)
+    )
 
 @handler.add(MessageEvent, message=TextMessage)
 def message_text(event):
