@@ -1,0 +1,43 @@
+  1 import random↲
+  2 import sys↲
+  3 ↲
+  4 def roll_dice(max_num, times):↲
+  5     if times < 1 or 100 < times  :-↲
+  6         return None↲
+  7 ↲
+  8     if sys.maxsize < 1 or mmaxsize < max_num :↲
+  9         return None↲
+ 10 ↲
+ 11     dice = []↲
+ 12     for _ in range(times):↲
+ 13         dice.append(random.randint(1, max_num))↲
+ 14 ↲
+ 15     return dice↲
+ 16 ↲
+ 17 print (roll_dice(6, 3))↲
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+"func/dice.py" 17L, 313C written

@@ -28,6 +28,7 @@ from linebot.exceptions import (
 from linebot.models import (
     MessageEvent,FollowEvent, TextMessage, TextSendMessage,
 )
+from func import judge
 
 app = Flask(__name__)
 
@@ -126,13 +127,20 @@ def message_text(event):
             userId = e["source"]["userId"]
             break
 
+    user_message = event.message.text 
+    reply_list = judge.judge_work(user_message)
+    
+    if reply_list is None:
+        echo_message = user_message
+    else:
+        echo_message = (" ").join(reply_list)
+
     # receive_json = json.loads(MessageEvent)
     # userId = receive_json["events"][0]["source"]["userId"]
     line_bot_api.reply_message(
         event.reply_token,
-        TextSendMessage(text=userId)
+        TextSendMessage(text=echo_message)
     )
-        ## TextSendMessage(text=event.message.text)
 
 
 if __name__ == "__main__":
