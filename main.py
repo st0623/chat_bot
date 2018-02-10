@@ -59,7 +59,7 @@ app.config['SQLALCHEMY_DATABASE_URI'] = os.environ['DATABASE_URL']
 db = SQLAlchemy(app)
 
 # モデル作成
-class Users(db.models):
+class Users(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     line_userid = db.Column(db.String(80), unique=True)
 
