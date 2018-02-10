@@ -19,7 +19,7 @@ import users
 from argparse import ArgumentParser
 
 from flask.ext.sqlalchemy import SQLAlchemy
-from flask import Flask, request, abort
+from flask import Flask, request, abort, render_template, request
 from linebot import (
     LineBotApi, WebhookHandler
 )
@@ -51,13 +51,9 @@ db = SQLAlchemy(app)
 line_bot_api = LineBotApi(channel_access_token)
 handler = WebhookHandler(channel_secret)
 
-from flask.ext.sqlalchemy import SQLAlchemy
-from flask import Flask, render_template, request
 
 # DB接続に関する部分
 app = Flask(__name__)
-app.config['SQLALCHEMY_DATABASE_URI'] = os.environ['DATABASE_URL']
-db = SQLAlchemy(app)
 
 # flaskによるマッピング
 @app.route("/callback", methods=['POST'])
