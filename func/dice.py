@@ -4,7 +4,7 @@ import sys
 MAX_DICE_TIME_NUM = 100
 
 
-def roll_dices(max_num, times):
+def roll_dices(times, max_num):
     if isinstance(max_num, str) and not max_num.isdigit():
         return None
 
