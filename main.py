@@ -15,7 +15,6 @@
 import os
 import sys
 import json
-import users
 from argparse import ArgumentParser
 
 from flask.ext.sqlalchemy import SQLAlchemy
