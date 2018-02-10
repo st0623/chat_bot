@@ -8,6 +8,7 @@ import getNikkeiHeadline
 import os
 from flask_sqlalchemy import SQLAlchemy
 from flask import Flask, request, abort
+from func.news.yahoo_news_rss import get_yahoo_news_list
 
 channel_access_token = os.getenv('LINE_CHANNEL_ACCESS_TOKEN', None)
 line_bot_api = LineBotApi(channel_access_token)
@@ -37,17 +38,18 @@ class Users(db.Model):
 # with open('line_id.csv') as f:
 #     reader = csv.reader(f)
 #    header = next(reader)
-@sched.scheduled_job('cron', day_of_week='mon-fri', hour=20)
+@sched.scheduled_job('cron', day_of_week='mon-fri', hour=14)
 def push_news():
     user_db = db.session.query(Users).all()
     line_id_list = []
     for v in user_db:
         line_id_list.append(v.line_userid)
-    nikkei = getNikkeiHeadline.getNikkeiHeadline()
+    # nikkei = getNikkeiHeadline.getNikkeiHeadline()
+    news_list = get_yahoo_news_list()
     title_list = nikkei.getTitle()
     url_list = nikkei.getUrl()
     try:
-        line_bot_api.multicast(line_id_list, TextSendMessage(text=title_list[0] + "\n https://www.nikkei.com"+url_list[0]))
+        line_bot_api.multicast(line_id_list, TextSendMessage(text=news_list[0][0] + " " + news_list[0][2]))
         print ("test")
     except LineBotApiError as e:
         print (e)
