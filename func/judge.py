@@ -8,7 +8,7 @@ def judge_work(message):
         split_str = message.split("d")
         return roll_dices(int(split_str[0]), int(split_str[1]))
 
-    return message
+    return None 
 
 def is_complete_match(pattern, message):
     if re.match(pattern, message):

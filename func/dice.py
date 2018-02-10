@@ -19,7 +19,7 @@ def roll_dices(max_num, times):
 
     dice = []
     for _ in range(times):
-        dice.append(random.randint(1, max_num))
+        dice.append(str(random.randint(1, max_num)))
 
     return dice
     
