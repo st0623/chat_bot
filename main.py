@@ -133,8 +133,8 @@ def message_text(event):
     if reply_list is None:
         echo_message = user_message
     else:
-        dice_sum = sum(list(map(lambda s: int(s), reply_list())))
-        echo_message = "["+(", ").join(reply_list)+"]"
+        dice_sum = sum(list(map(lambda s: int(s), reply_list)))
+        echo_message = "[" + (", ").join(reply_list) + "]"
         echo_message += ":" + str(dice_sum)
         
 
