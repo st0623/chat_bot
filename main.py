@@ -133,7 +133,10 @@ def message_text(event):
     if reply_list is None:
         echo_message = user_message
     else:
-        echo_message = (" ").join(reply_list)
+        dice_sum = sum(list(map(lambda s: int(s), reply_list())))
+        echo_message = "["+(", ").join(reply_list)+"]"
+        echo_message += ":" + str(dice_sum)
+        
 
     # receive_json = json.loads(MessageEvent)
     # userId = receive_json["events"][0]["source"]["userId"]
