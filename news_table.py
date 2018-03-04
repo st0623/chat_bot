@@ -20,7 +20,7 @@ class News:
     def get_news_str(self):
         news_str = ""
         for key, value in self.news_dict.items():
-            news_str += key + str(value) + "\n"
+            news_str += key + "\t" + str(value) + "\n"
 
 
         return news_str
