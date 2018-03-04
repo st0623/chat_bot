@@ -7,7 +7,9 @@ from news_table import News
 
 
 def get_news_list():
+    
     url = os.environ["NEWS_DATABASE_URL"]
+
     engine = sa.create_engine(url)
     session = sessionmaker(bind=engine)()
     conn = engine.connect()
@@ -37,4 +39,3 @@ def list2News(news_list):
 
     return newses
 
-print (get_news_list())
