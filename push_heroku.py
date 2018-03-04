@@ -55,8 +55,9 @@ def push_news():
     # url_list = nikkei.getUrl()
 
     try:
-        line_bot_api.multicast(line_id_list, TextSendMessage(text=newses[random.randint(0, len(newses))].get_news_str()))
-        print ("test")
+        random_index = random.randint(0, len(newses))
+        line_bot_api.multicast(line_id_list, TextSendMessage(text=newses[random_index].get_news_str()))
+        print (random_index)
     except LineBotApiError as e:
         print (e)
 
