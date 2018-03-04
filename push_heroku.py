@@ -56,8 +56,8 @@ def push_news():
 
     try:
         random_index = random.randint(0, len(newses))
-        line_bot_api.multicast(line_id_list, TextSendMessage(text=newses[random_index].get_news_str()))
         print (random_index)
+        line_bot_api.multicast(line_id_list, TextSendMessage(text=newses[random_index].get_news_str()))
     except LineBotApiError as e:
         print (e)
 
