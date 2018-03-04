@@ -4,7 +4,7 @@ class News:
         self.news_dict = {cl: "" for cl in self.column_list}
 
     def set_news(self, news_list):
-        if len(self.column_list) != len(news_dict):
+        if len(self.column_list) != len(self.news_dict):
             print ("no match len")
             return False 
 
