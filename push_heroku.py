@@ -47,7 +47,7 @@ def push_news():
     for v in user_db:
         line_id_list.append(v.line_userid)
 
-    news_list = get_news_list
+    news_list = get_news_list()
     # nikkei = getNikkeiHeadline.getNikkeiHeadline()
     # news_list = get_yahoo_news_list()
     # title_list = nikkei.getTitle()
