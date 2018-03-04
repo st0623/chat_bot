@@ -32,7 +32,8 @@ def list2News(news_list):
     newses = []
     for nl in news_list:
         tmp_news = News()
-        newses.append(tmp_news(nl))
+        tmp_news.set_news(nl)
+        newses.append(tmp_news)
 
     return newses
 
