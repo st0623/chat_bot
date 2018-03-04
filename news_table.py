@@ -9,7 +9,7 @@ class News:
             return False 
 
         for idx, cl in enumerate(self.column_list):
-            self.column_list[cl] = news_list[idx]
+            self.news_dict[self.column_list[idx]] = news_list[idx]
 
         return True
 
