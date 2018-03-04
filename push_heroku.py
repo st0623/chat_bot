@@ -10,6 +10,7 @@ from flask_sqlalchemy import SQLAlchemy
 from flask import Flask, request, abort
 from func.news.yahoo_news_rss import get_yahoo_news_list
 from connect_sqlalchemy import get_news_list
+import random
 
 channel_access_token = os.getenv('LINE_CHANNEL_ACCESS_TOKEN', None)
 line_bot_api = LineBotApi(channel_access_token)
@@ -54,7 +55,7 @@ def push_news():
     # url_list = nikkei.getUrl()
 
     try:
-        line_bot_api.multicast(line_id_list, TextSendMessage(text=newses[0].get_news_str()))
+        line_bot_api.multicast(line_id_list, TextSendMessage(text=newses[random.randint(0, len(newses))].get_news_str()))
         print ("test")
     except LineBotApiError as e:
         print (e)
