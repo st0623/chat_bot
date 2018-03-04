@@ -47,14 +47,14 @@ def push_news():
     for v in user_db:
         line_id_list.append(v.line_userid)
 
-    news_list = get_news_list()
+    newses= get_news_list()
     # nikkei = getNikkeiHeadline.getNikkeiHeadline()
     # news_list = get_yahoo_news_list()
     # title_list = nikkei.getTitle()
     # url_list = nikkei.getUrl()
 
     try:
-        line_bot_api.multicast(line_id_list, TextSendMessage(text=str(news_list[0][0]) + " " + news_list[0][1]))
+        line_bot_api.multicast(line_id_list, TextSendMessage(text=newses[0].get_news_str()))
         print ("test")
     except LineBotApiError as e:
         print (e)
