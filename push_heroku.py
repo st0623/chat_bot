@@ -54,7 +54,7 @@ def push_news():
     # url_list = nikkei.getUrl()
 
     try:
-        line_bot_api.multicast(line_id_list, TextSendMessage(text=news_list[0][0] + " " + news_list[0][1]))
+        line_bot_api.multicast(line_id_list, TextSendMessage(text=str(news_list[0][0]) + " " + news_list[0][1]))
         print ("test")
     except LineBotApiError as e:
         print (e)
