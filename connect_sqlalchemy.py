@@ -1,4 +1,5 @@
 import sqlalchemy as sa
+import os
 from sqlalchemy import *
 from sqlalchemy.orm.session import sessionmaker
 from sqlalchemy.sql import select 
