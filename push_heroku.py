@@ -39,7 +39,7 @@ class Users(db.Model):
 # with open('line_id.csv') as f:
 #     reader = csv.reader(f)
 #    header = next(reader)
-@sched.scheduled_job('cron', minutes=1)# day_of_week='mon-fri', hour=21)
+@sched.scheduled_job('interval', minutes=1)# day_of_week='mon-fri', hour=21)
 def push_news():
     user_db = db.session.query(Users).all()
     line_id_list = []
