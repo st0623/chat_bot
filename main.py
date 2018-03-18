@@ -102,7 +102,7 @@ def get_userid():
 def follow(event):
     reply_lineid = get_userid()
     # line_idが未登録ならユーザー追加
-    if not db.session.query(line_user).filter(line_user.line_id == reply_lineid).count():
+    if not db.session.query(line_user).filter(line_user.line_userid == reply_lineid).count():
         reg = line_user(reply_lineid)
         db.session.add(reg)
         db.session.commit()
