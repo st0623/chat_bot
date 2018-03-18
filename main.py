@@ -59,9 +59,9 @@ app.config['SQLALCHEMY_DATABASE_URI'] = os.environ['DATABASE_URL']
 db = SQLAlchemy(app)
 
 # モデル作成
-class Users(db.Model):
+class line_user(db.Model):
     id = db.Column(db.Integer, primary_key=True)
-    line_userid = db.Column(db.String(80), unique=True)
+    line_userid = db.Column(db.String(255), unique=True)
 
     def __init__(self, line_userid):
         self.line_userid = line_userid
@@ -101,8 +101,8 @@ def get_userid():
 @handler.add(FollowEvent)
 def follow(event):
     line_userId = get_userid()
-    # emailが未登録ならユーザー追加
-    if not db.session.query(Users).filter(Users.line_userid == line_userId).count():
+    # line_idが未登録ならユーザー追加
+    if not db.session.query(line_userid).filter(line_userid.line_userid == line_userId).count():
         reg = Users(line_userId)
         db.session.add(reg)
         db.session.commit()
