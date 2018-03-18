@@ -91,7 +91,6 @@ def callback():
 
     return 'OK'
 
-
 def get_userid():
     body = request.get_data(as_text=True)
     receive_json = json.loads(body)
@@ -100,9 +99,9 @@ def get_userid():
 
 @handler.add(FollowEvent)
 def follow(event):
-    line_userId = get_userid()
+    reply_lineid = get_userid()
     # line_idが未登録ならユーザー追加
-    if not db.session.query(line_userid).filter(line_userid.line_userid == line_userId).count():
+    if not db.session.query(line_user).filter(line_user.line_userid == reply_lineid).count():
         reg = Users(line_userId)
         db.session.add(reg)
         db.session.commit()
