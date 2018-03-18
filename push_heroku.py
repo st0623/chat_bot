@@ -27,7 +27,7 @@ sched = BlockingScheduler()
 
 class line_user(db.Model):
     id = db.Column(db.Integer, primary_key=True)
-    line_id = db.Column(db.String(255), unique=True)
+    line_id = db.Column(db.String(255))#, unique=True)
 
     def __init__(self, line_id):
         self.line_id = line_id
