@@ -61,14 +61,13 @@ db = SQLAlchemy(app)
 # モデル作成
 class line_user(db.Model):
     id = db.Column(db.Integer, primary_key=True)
-    line_userid = db.Column(db.String(255), unique=True)
+    line_id = db.Column(db.String(255), unique=True)
 
     def __init__(self, line_userid):
         self.line_userid = line_userid
 
     def __repr__(self):
         return '<line_user %r>' % self.line_userid
-
 
 # flaskによるマッピング
 @app.route("/callback", methods=['POST'])
@@ -91,11 +90,13 @@ def callback():
 
     return 'OK'
 
+
 def get_userid():
     body = request.get_data(as_text=True)
     receive_json = json.loads(body)
     userId = receive_json["events"][0]["source"]["userId"]
     return userId
+
 
 @handler.add(FollowEvent)
 def follow(event):
