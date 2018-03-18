@@ -37,14 +37,12 @@ class line_user(db.Model):
 
 
 @sched.scheduled_job('interval', minutes=2)# day_of_week='mon-fri', hour=21)
+
 def push_news():
     user_db = db.session.query(line_user).all()
     line_id_list = []
 
-
-
     for v in user_db:
-        print ("test")
         line_id_list.append(v.line_id)
 
     print (line_id_list)
@@ -53,7 +51,7 @@ def push_news():
     try:
         random_index = random.randint(0, len(newses))
         print (random_index)
-        line_bot_api.multicast(line_id_list, TextSendMessage(text=newses[random_index].get_news_str()))
+        line_bot_api.multicast(line_id_list[1:], TextSendMessage(text=newses[random_index].get_news_str()))
     except LineBotApiError as e:
         print (e)
 
