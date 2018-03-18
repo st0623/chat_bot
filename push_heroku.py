@@ -45,8 +45,7 @@ class line_user(db.Model):
         self.line_id = line_id
 
     def __repr__(self):
-        return '<line_user %r>' % self.line_userid
-
+        return '<line_user %r>' % self.line_id
 
 
 @sched.scheduled_job('interval', minutes=2)# day_of_week='mon-fri', hour=21)
