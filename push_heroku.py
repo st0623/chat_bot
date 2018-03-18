@@ -57,6 +57,7 @@ def push_news():
     for v in user_db:
         line_id_list.append(v.line_id)
 
+    print (line_id_list)
     newses= get_news_list()
 
     try:
