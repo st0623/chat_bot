@@ -6,7 +6,7 @@ import os
 from news_table import News
 
 
-def get_news_list():
+def get_news_list(table_name="news"):
     
     url = os.environ["NEWS_DATABASE_URL"]
 
@@ -22,7 +22,7 @@ def get_news_list():
 # Engineに結びつける
     meta.bind = engine 
 
-    sample_table = Table('news', meta, autoload=True)
+    sample_table = Table(table_name, meta, autoload=True)
 # 全検索の定義および実行
     selectQuery = select([sample_table])
     executeResult = conn.execute(selectQuery).fetchall()

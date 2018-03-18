@@ -15,6 +15,7 @@
 import os
 import sys
 import json
+from connect_sqlalchemy.py import get_news_list
 from argparse import ArgumentParser
 from flask_sqlalchemy import SQLAlchemy
 from flask import Flask, request, abort
@@ -44,7 +45,7 @@ if channel_access_token is None:
 
 
 # DB接続に関する部分
-app.config['SQLALCHEMY_DATABASE_URI'] = os.environ['DATABASE_URL']
+# app.config['SQLALCHEMY_DATABASE_URI'] = os.environ['DATABASE_URL']
 db = SQLAlchemy(app)
 
 line_bot_api = LineBotApi(channel_access_token)
@@ -55,7 +56,7 @@ from flask import Flask, render_template, request
 
 # DB接続に関する部分
 app = Flask(__name__)
-app.config['SQLALCHEMY_DATABASE_URI'] = os.environ['DATABASE_URL']
+app.config['SQLALCHEMY_DATABASE_URI'] = os.environ['NEWS_DATABASE_URL']
 db = SQLAlchemy(app)
 
 # モデル作成
