@@ -18,7 +18,7 @@ line_bot_api = LineBotApi(channel_access_token)
 line_id_list = []
 
 app = Flask(__name__)
-app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
+# app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
 # DB接続に関する部分
 app.config['SQLALCHEMY_DATABASE_URI'] = os.environ['NEWS_DATABASE_URL']
 db = SQLAlchemy(app)
@@ -27,7 +27,7 @@ sched = BlockingScheduler()
 
 class line_user(db.Model):
     id = db.Column(db.Integer, primary_key=True)
-    line_id = db.Column(db.String(255))#, unique=True)
+    line_id = db.Column(db.String(255), unique=True)
 
     def __init__(self, line_id):
         self.line_id = line_id
@@ -41,7 +41,10 @@ def push_news():
     user_db = db.session.query(line_user).all()
     line_id_list = []
 
+
+
     for v in user_db:
+        print ("test")
         line_id_list.append(v.line_id)
 
     print (line_id_list)
