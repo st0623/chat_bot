@@ -61,7 +61,7 @@ db = SQLAlchemy(app)
 # モデル作成
 class line_user(db.Model):
     id = db.Column(db.Integer, primary_key=True)
-    self.line_id = db.Column(db.String(255), unique=True)
+    line_id = db.Column(db.String(255), unique=True)
 
     def __init__(self, line_id):
         self.line_id = line_id
@@ -104,6 +104,7 @@ def follow(event):
     # line_idが未登録ならユーザー追加
     if not db.session.query(line_user).filter(line_user.line_id == reply_lineid).count():
         reg = line_user(reply_lineid)
+        print ("in line")
         db.session.add(reg)
         db.session.commit()
     follow_message = "友達登録ありがとう!\n毎日最新のニュースをプッシュします"
