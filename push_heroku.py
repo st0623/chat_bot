@@ -35,15 +35,27 @@ class Users(db.Model):
 
     def __repr__(self):
         return '<Users %r>' % self.line_userid
+        
+# モデル作成
+class line_user(db.Model):
+    id = db.Column(db.Integer, primary_key=True)
+    line_id = db.Column(db.String(255), unique=True)
+
+    def __init__(self, line_userid):
+        self.line_userid = line_userid
+
+    def __repr__(self):
+        return '<line_user %r>' % self.line_userid
+
 
 
 @sched.scheduled_job('interval', minutes=2)# day_of_week='mon-fri', hour=21)
 def push_news():
-    user_db = db.session.query(Users).all()
+    user_db = db.session.query(line_user).all()
     line_id_list = []
 
     for v in user_db:
-        line_id_list.append(v.line_userid)
+        line_id_list.append(v.line_id)
 
     newses= get_news_list()
 
