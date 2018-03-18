@@ -37,7 +37,7 @@ class Users(db.Model):
         return '<Users %r>' % self.line_userid
 
 
-@sched.scheduled_job('interval', hours = 1)# day_of_week='mon-fri', hour=21)
+@sched.scheduled_job('interval', minitus=2)# day_of_week='mon-fri', hour=21)
 def push_news():
     user_db = db.session.query(Users).all()
     line_id_list = []
