@@ -15,7 +15,6 @@
 import os
 import sys
 import json
-from connect_sqlalchemy.py import get_news_list
 from argparse import ArgumentParser
 from flask_sqlalchemy import SQLAlchemy
 from flask import Flask, request, abort
