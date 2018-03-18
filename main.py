@@ -67,7 +67,7 @@ class line_user(db.Model):
         self.line_userid = line_userid
 
     def __repr__(self):
-        return '<Users %r>' % self.line_userid
+        return '<line_user %r>' % self.line_userid
 
 
 # flaskによるマッピング
@@ -102,7 +102,7 @@ def follow(event):
     reply_lineid = get_userid()
     # line_idが未登録ならユーザー追加
     if not db.session.query(line_user).filter(line_user.line_userid == reply_lineid).count():
-        reg = Users(line_userId)
+        reg = line_user(reply_lineid)
         db.session.add(reg)
         db.session.commit()
     follow_message = "友達登録ありがとう!\n毎日最新のニュースをプッシュします"
@@ -134,7 +134,6 @@ def message_text(event):
         dice_sum = sum(list(map(lambda s: int(s), reply_list)))
         echo_message = "[" + (", ").join(reply_list) + "]"
         echo_message += ":" + str(dice_sum)
-        
 
     # receive_json = json.loads(MessageEvent)
     # userId = receive_json["events"][0]["source"]["userId"]
