@@ -41,8 +41,8 @@ class line_user(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     line_id = db.Column(db.String(255), unique=True)
 
-    def __init__(self, line_userid):
-        self.line_userid = line_userid
+    def __init__(self, line_id):
+        self.line_id = line_id
 
     def __repr__(self):
         return '<line_user %r>' % self.line_userid
